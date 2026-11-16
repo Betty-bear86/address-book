@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>通讯录 · Address Book</title>
+  <meta name="description" content="支持星标常用联系人、多联系方式与 Excel 导入导出的通讯录管理系统" />
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20v-1.6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20"/><circle cx="9" cy="7.5" r="3.5"/><path d="M17 4.2a3.5 3.5 0 0 1 0 6.6M22 20v-1.6a4 4 0 0 0-3-3.8"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.8l5.9-.9L12 3.6Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.6"/><path d="m16 16 4.4 4.4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.2 3.5h3l1.4 3.6-2 1.4a12.4 12.4 0 0 0 5.9 5.9l1.4-2 3.6 1.4v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.2 5.7a2 2 0 0 1 2-2.2Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.6 7 8.4 6 8.4-6"/></symbol>
+  <symbol id="i-wechat" viewBox="0 0 24 24"><path d="M14.5 9.2c0-2.6-2.5-4.7-5.5-4.7S3.5 6.6 3.5 9.2s2.5 4.7 5.5 4.7c.6 0 1.2-.1 1.7-.2l2.4 1.3-.6-2.1c1.2-.8 2-2.1 2-3.7Z"/><path d="M20.5 15.4c0-2-2-3.6-4.4-3.6s-4.4 1.6-4.4 3.6 2 3.6 4.4 3.6c.5 0 1 0 1.4-.2l1.9 1-.5-1.7c1-.6 1.6-1.6 1.6-2.7Z"/></symbol>
+  <symbol id="i-qq" viewBox="0 0 24 24"><path d="M12 3.5c-3 0-5 2.4-5 5.4 0 1.5-.6 2.6-1.4 3.7-.7 1-.9 2-.4 2.6.4.5 1.2.3 1.7-.3.3.9 1 1.7 1.9 2.2-.4.5-.3 1.2.4 1.5 1 .4 2.4.4 2.8 0 .7-.3.8-1 .4-1.5.9-.5 1.6-1.3 1.9-2.2.5.6 1.3.8 1.7.3.5-.6.3-1.6-.4-2.6-.8-1.1-1.4-2.2-1.4-3.7 0-3-2-5.4-5-5.4Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13.5a4.2 4.2 0 0 0 6 0l2.4-2.4a4.2 4.2 0 0 0-6-6L11 6.6"/><path d="M14 10.5a4.2 4.2 0 0 0-6 0l-2.4 2.4a4.2 4.2 0 0 0 6 6L13 17.4"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.4"/><path d="M15 5.4A2.4 2.4 0 0 0 12.6 3H6.4A2.4 2.4 0 0 0 4 5.4v6.2A2.4 2.4 0 0 0 6.4 14"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4l10.5-10.5a2.4 2.4 0 0 0-3.4-3.4L4.6 16.6 4 20Z"/><path d="m13.5 7.5 3 3"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9.5 4h5M6.5 7l.8 12.1a1.9 1.9 0 0 0 1.9 1.8h5.6a1.9 1.9 0 0 0 1.9-1.8L17.5 7"/><path d="M10.5 11v6M13.5 11v6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4.5M7.5 9 12 4.5 16.5 9"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11.5M7.5 11l4.5 4.5 4.5-4.5"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M13.5 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5L13.5 3Z"/><path d="M13.5 3v5.5H19M8.5 13h7M8.5 17h4.5"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6.5h16M4 12h16M4 17.5h16"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.5v5.2M12 16.2v.1"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5M12 7.8v.1"/></symbol>
+  <symbol id="i-contact" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="3"/><circle cx="12" cy="10" r="2.6"/><path d="M7.8 17.2c.5-1.8 2.1-2.8 4.2-2.8s3.7 1 4.2 2.8"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-contact"/></svg></div>
+      <div class="brand-text"><strong>通讯录</strong><span>Address Book</span></div>
+    </div>
+
+    <nav class="nav" id="mainNav">
+      <a class="nav-item" data-filter="all" href="#/all">
+        <svg class="ic"><use href="#i-users"/></svg><span class="nav-label">全部联系人</span>
+        <span class="pill" id="pillAll">0</span>
+      </a>
+      <a class="nav-item" data-filter="starred" href="#/starred">
+        <svg class="ic"><use href="#i-star"/></svg><span class="nav-label">星标联系人</span>
+        <span class="pill" id="pillStarred">0</span>
+      </a>
+    </nav>
+
+    <div class="side-section">
+      <div class="side-title"><span>分组</span><span id="groupTotal"></span></div>
+      <div class="group-nav" id="groupNav"></div>
+    </div>
+
+    <div class="side-actions">
+      <button class="btn btn-soft" id="btnImport"><svg class="ic"><use href="#i-upload"/></svg>导入 Excel</button>
+      <button class="btn btn-soft" id="btnExport"><svg class="ic"><use href="#i-download"/></svg>导出 Excel</button>
+      <button class="btn btn-soft" id="btnTemplate"><svg class="ic"><use href="#i-file"/></svg>下载导入模板</button>
+    </div>
+    <div class="side-foot">极限编程 · 软件工程课程作业</div>
+  </aside>
+  <div class="sidebar-mask" id="sidebarMask"></div>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="btnMenu" aria-label="打开菜单"><svg class="ic"><use href="#i-menu"/></svg></button>
+      <label class="search" for="searchInput">
+        <svg class="ic search-ic"><use href="#i-search"/></svg>
+        <input id="searchInput" type="search" placeholder="搜索姓名、公司、电话、邮箱…" autocomplete="off" spellcheck="false" />
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </label>
+      <div class="topbar-actions">
+        <div class="segmented" id="viewToggle" role="group" aria-label="视图切换">
+          <button type="button" data-view="rows" class="active" title="列表视图"><svg class="ic"><use href="#i-list"/></svg></button>
+          <button type="button" data-view="cards" title="卡片视图"><svg class="ic"><use href="#i-grid"/></svg></button>
+        </div>
+        <button class="btn btn-primary" id="btnNew"><svg class="ic"><use href="#i-plus"/></svg>新建联系人</button>
+      </div>
+    </header>
+
+    <div class="scroll" id="scroll">
+      <section class="stats" id="stats"></section>
+
+      <section class="section quick" id="quickSection" hidden>
+        <div class="section-head">
+          <h2><svg class="ic gold"><use href="#i-star"/></svg>常用联系人</h2>
+          <span class="section-sub" id="quickSub"></span>
+        </div>
+        <div class="quick-track" id="quickTrack"></div>
+      </section>
+
+      <section class="section list-section">
+        <div class="section-head list-head">
+          <h2 id="listTitle">全部联系人</h2>
+          <span class="section-sub" id="listSub"></span>
+          <div class="spacer"></div>
+          <label class="select-wrap">
+            <select id="sortSelect" aria-label="排序方式">
+              <option value="default">星标优先</option>
+              <option value="name">按姓名</option>
+              <option value="updated">最近更新</option>
+            </select>
+            <svg class="ic chev"><use href="#i-chevron"/></svg>
+          </label>
+        </div>
+        <div class="contact-view rows" id="contactView"></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="drawer-mask" id="drawerMask"></div>
+<aside class="drawer" id="drawer" aria-label="联系人详情"></aside>
+<div class="modal-root" id="modalRoot" hidden></div>
+<div class="modal-root" id="confirmRoot" hidden></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
