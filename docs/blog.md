@@ -9,10 +9,7 @@
 | 其他参考 | [Flask 官方文档](https://flask.palletsprojects.com/)、[openpyxl 文档](https://openpyxl.readthedocs.io/)、[MDN Web Docs](https://developer.mozilla.org/) |
 
 <!--
-提交前请替换以下内容：
-1. 第二节「项目地址」中的 GitHub 仓库地址与部署访问地址；
-2. 第八节提交记录表中的作者名（如需）；
-3. 若有云服务器，按 docs/部署说明.md 部署后补充访问地址，即可获得 15 分加分项。
+说明：GitHub 仓库地址已填写；如后续完成云端部署，把公网地址补充到第一节「云端访问地址」即可（可选加分项）。
 -->
 
 ## 目录
@@ -47,11 +44,11 @@
 
 | 项目 | 地址 |
 | --- | --- |
-| GitHub 仓库 | `https://github.com/<你的GitHub用户名>/address-book` 【提交前替换】 |
-| 代码规范文档 | [`docs/编码规范.md`](https://github.com/<你的GitHub用户名>/address-book/blob/main/docs/编码规范.md) |
+| GitHub 仓库 | `https://github.com/Betty-bear86/address-book` |
+| 代码规范文档 | [`docs/编码规范.md`](https://github.com/Betty-bear86/address-book/blob/main/docs/编码规范.md) |
 | 本地运行地址 | `http://127.0.0.1:8000`（`python app.py`） |
 | 云端访问地址 | 未部署（可选加分项，部署步骤见第六节，约 10 分钟） |
-| 示例导入文件 | [`examples/示例通讯录.xlsx`](https://github.com/<你的GitHub用户名>/address-book/blob/main/examples/示例通讯录.xlsx) |
+| 示例导入文件 | [`examples/示例通讯录.xlsx`](https://github.com/Betty-bear86/address-book/blob/main/examples/示例通讯录.xlsx) |
 
 ## 二、作业要求与完成情况对照
 
@@ -64,7 +61,7 @@
 | 添加多个联系方式 | 10 | ✅ 6 种类型、任意条数、场景标签、唯一主联系方式 | `backend/validation.py`、编辑弹窗 |
 | 导入与导出 | 25 | ✅ 动态列导出（含样式与说明页）、导入校验与错误报告、合并/新增策略 | `backend/excel_io.py` |
 | Web 部署（可选） | +15 | ⚠️ 未部署到云服务器；已提供 Dockerfile、systemd + Nginx 完整步骤 | `Dockerfile`、`docs/部署说明.md` |
-| 模块划分、个人参与、仓库提交 ≥ 3 次 | — | ✅ 9 次提交、模块化目录、单人完成全部编码 | 第八节 |
+| 模块划分、个人参与、仓库提交 ≥ 3 次 | — | ✅ 10 次提交、模块化目录、单人完成全部编码 | 第八节 |
 
 ## 三、需求分析与模块设计
 
@@ -410,7 +407,7 @@ python app.py --demo
 **云端部署（加分项）**：本次未购买云服务器，但已完成全部部署准备，购买后约 10 分钟可上线：
 
 1. `Dockerfile` 使用 gunicorn（2 worker）+ `/data` 数据卷，`docker build` 后一条命令启动；
-2. [`docs/部署说明.md`](https://github.com/<你的GitHub用户名>/address-book/blob/main/docs/部署说明.md) 提供 Ubuntu + systemd + Nginx 的完整命令与配置片段；
+2. [`docs/部署说明.md`](https://github.com/Betty-bear86/address-book/blob/main/docs/部署说明.md) 提供 Ubuntu + systemd + Nginx 的完整命令与配置片段；
 3. 数据库路径通过环境变量 `ADDRESS_BOOK_DB` 外置，容器重建不丢数据；
 4. 部署完成后将公网地址填写到本文第一节「云端访问地址」。
 
@@ -444,16 +441,29 @@ OK
 
 ## 八、Git 提交记录
 
-仓库按「骨架 → 后端 → 接口 → Excel → 前端 → 测试 → 文档 → 容器化 → 博客」的顺序小步提交，共 **9 次提交**，每次提交只做一件事，提交信息遵循 `type(scope): subject` 规范。
+仓库按「骨架 → 后端 → 接口 → Excel → 前端 → 测试 → 文档 → 容器化 → 博客」的顺序小步提交，共 **10 次提交**，每次提交只做一件事，提交信息遵循 `type(scope): subject` 规范。
 
 ![提交记录](images/11-commits.png)
 
 <!-- GIT_LOG_TABLE_START -->
+| # | 提交 | 提交信息 | 变更统计 |
+| --- | --- | --- | --- |
+| 1 | `72cffea` | chore: 初始化项目骨架与依赖配置 | 4 个文件变更，56 行新增 |
+| 2 | `2e881f6` | feat(backend): 设计 SQLite 数据模型、字段校验与联系人仓储层 | 4 个文件变更，598 行新增 |
+| 3 | `6a4aa16` | feat(api): 实现联系人增删改查、星标切换与演示数据接口 | 3 个文件变更，493 行新增 |
+| 4 | `03aaf6f` | feat(excel): 实现 Excel 动态列导出与容错导入（校验/合并/错误报告） | 2 个文件变更，364 行新增 |
+| 5 | `9b69ae4` | feat(web): 完成通讯录单页界面（星标快捷区/详情抽屉/导入导出/响应式） | 4 个文件变更，2479 行新增 |
+| 6 | `8736fb4` | test: 补充后端接口、校验与 Excel 往返幂等测试 | 1 个文件变更，247 行新增 |
+| 7 | `a0fcbdc` | docs: 编写 README、编码规范与云端部署说明 | 3 个文件变更，439 行新增 |
+| 8 | `a11ed1a` | chore: 添加 gunicorn + Docker 生产部署配置 | 2 个文件变更，38 行新增 |
+| 9 | `4e2bb07` | docs: 完成作业博客与运行截图 | 12 个文件变更，520 行新增 |
 <!-- GIT_LOG_TABLE_END -->
 
 | 成员 | 角色 | 提交次数 | 说明 |
 | --- | --- | --- | --- |
-| 本人（单人项目） | 需求、设计、前后端编码、测试、文档、部署准备 | 9 | 全部提交均由本人完成 |
+| Betty-bear86（本人） | 需求、设计、前后端编码、测试、文档、部署准备 | 10 | 全部提交均由本人完成 |
+
+> 上表为第 1～9 次提交；第 10 次提交（`docs: 补充提交记录截图与操作演示动图`）用于补充本节截图与 `docs/images/demo.gif`，因此仓库总提交数为 10。
 
 ## 九、分工与贡献比
 
