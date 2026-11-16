@@ -4,6 +4,17 @@
 
 前端使用原生 HTML / CSS / JavaScript，后端使用 Python + Flask + SQLite，无需前端构建工具，一条命令即可运行。
 
+## 团队
+
+| 成员 | 学号 | 分工 |
+| --- | --- | --- |
+| 蔡耀华 | 832401302 | 前端页面与交互、页面样式、README 与编码规范、博客与截图 |
+| 左项荣 | 832401230 | 数据库与 REST 接口、字段校验、Excel 导入导出、单元测试、Docker 部署、PR/Release |
+
+- 协作说明：[`docs/团队协作说明.md`](docs/团队协作说明.md)
+- Pull Request：[#1 团队分工与协作说明](https://github.com/Betty-bear86/address-book/pull/1)
+- Release：[v1.0.0](https://github.com/Betty-bear86/address-book/releases/tag/v1.0.0)
+
 ![主界面](docs/images/01-overview.png)
 
 ## 功能特性
