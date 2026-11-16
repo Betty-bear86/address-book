@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# 数据库与运行时产物
+data/*.db
+data/*.db-wal
+data/*.db-shm
+*.sqlite3
+*.log
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+~$*
+
+# 本地开发工具（截图、浏览器自动化脚本，不入库）
+.tools/
